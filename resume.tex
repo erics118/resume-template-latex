@@ -1,0 +1,207 @@
+\documentclass[10pt]{article}
+\usepackage[margin=0.5in, letterpaper]{geometry}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{latexsym}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xparse} 
+\usepackage[hidelinks]{hyperref}
+\usepackage[normalem]{ulem}
+\usepackage{tikz}
+\usepackage{fontawesome5}
+\usepackage{etoolbox}
+
+\setcounter{secnumdepth}{0} % remove section numbering
+\pdfgentounicode=1 % ensure unicode characters in PDF
+\pagestyle{empty} % remove page number
+\urlstyle{same}
+
+% spacing
+\newskip\sectiontopspace
+\newskip\sectionbotspace
+\newskip\headingtopspace
+\newskip\headingbotspace
+\newskip\itemsepspace
+
+\sectiontopspace=2pt plus 2fil minus 2pt
+\sectionbotspace=6pt plus 1fil minus 3pt
+\headingtopspace=3pt plus 1fil minus 2pt
+\headingbotspace=1pt minus 1pt
+\itemsepspace=1pt plus 0.2fil minus 1pt
+
+\titlespacing*{\section}{0pt}{\sectiontopspace}{\sectionbotspace}
+\titleformat{\section}{\large\bfseries\scshape}{}{}{}[\titlerule]
+
+% custom non-copyable bullet point
+\newcommand{\graphicbullet}{%
+    \tikz[baseline=-0.77ex] \fill (0,0) circle (0.5ex);%
+}
+
+% itemize and description formatting
+\setlist[itemize]{label=\graphicbullet, leftmargin=*, nosep, itemsep=\itemsepspace}
+\setlist[description]{leftmargin=0pt, nosep, itemsep=\itemsepspace}
+% set description label to italic with colon
+\renewcommand*{\descriptionlabel}[1]{\hspace\labelsep\textit{#1:}}
+
+% custom email and link commands
+% use \uline instead of \underline so that the lines are the right distance below the text
+\newcommand{\link}[1]{\href{https://#1}{\uline{#1}}}
+\newcommand{\email}[1]{\href{mailto:#1}{\uline{#1}}}
+\newcommand{\repo}[2]{\texttt{\href{https://github.com/#1/#2}{#2}}}
+\newcommand{\name}[1]{{\huge \textbf{#1}} \\ \vspace{3pt plus 3fil minus 2pt}}
+
+\newif\ifatsectionstart
+\atsectionstartfalse
+\pretocmd{\section}{\atsectionstarttrue}{}{}
+
+% \heading[LOCATION]{ORGANIZATION}{ROLE}{DATE}
+\NewDocumentCommand{\heading}{O{} m m m}{%
+    \par
+    \ifatsectionstart
+        \atsectionstartfalse
+        \vspace{0pt}%
+    \else
+        \vspace{\headingtopspace}%
+    \fi
+    \noindent
+    \textbf{#2}\hfill#4\\
+    \textit{#3}\hfill\textit{#1}
+    \par\vspace{\headingbotspace}%
+}
+
+% \project{NAME}{LINK}
+\NewDocumentCommand{\project}{m m}{%
+    \par
+    \ifatsectionstart
+        \atsectionstartfalse
+        \vspace{0pt}%
+    \else
+        \vspace{\headingtopspace}%
+    \fi
+    \noindent
+    \textbf{#1} \textemdash\;#2%
+    \par\vspace{\headingbotspace}%
+}
+
+% join list with trailing commas
+\ExplSyntaxOn
+\NewDocumentCommand{\joinlist}{m}{
+    \clist_use:nn { #1 } { ,~ }
+}
+\ExplSyntaxOff
+
+\begin{document}
+\begin{center}
+    \name{Eric Shen}
+    City, NJ |
+    (123) 456-7890 |
+    \email{email@example.com} |
+    \faLinkedin\ \href{https://linkedin.com/in/ericzshen/}{\uline{in/ericzshen}} |
+    \faGithub\ \href{https://github.com/erics118}{\uline{erics118}}
+\end{center}
+
+\section{Education}
+
+\heading[Ithaca, NY]{Cornell University}{B.A. in Math and Computer Science}{Expected Graduation May 2028}
+\begin{description}
+    \item[Relevant Coursework] \joinlist{
+            Functional Programming,
+            Discrete Math,
+            Data Structures \& Algorithms,
+            Abstract Algebra,
+        }
+\end{description}
+
+\section{Experience}
+
+\heading[Ithaca, NY]{Cornell Electric Vehicles}{Telemetry Subteam Member}{Sep 2025 -- Present}
+\begin{itemize}
+    \item Contributed to the development of autonomous, hyper-efficient electric vehicles on a 65+ member engineering team
+    \item Owned the migration to a containerized ROS2 stack over Starlink via Tailscale, enabling off-vehicle monitoring at 200Hz
+    \item Built and maintained a dashboard with React + FastAPI, visualizing 10+ sensor streams for live vehicle diagnostics
+\end{itemize}
+
+\heading[Ithaca, NY]{Cornell}{Associate}{Jan 2026 -- Present}
+\begin{itemize}
+    \item Built
+    \item Engineered
+\end{itemize}
+
+\heading[Remote]{Company Inc.}{Specialist}{Aug 2024 -- Jun 2025}
+\begin{itemize}
+    \item Redesigned
+    \item Worked
+\end{itemize}
+
+\heading[City, NJ]{University}{Researcher}{Jun 2024 -- Sep 2024}
+\begin{itemize}
+    \item Modeled
+    \item Built
+\end{itemize}
+
+\section{Projects}
+
+
+\project{This Resume Template}{\repo{erics118}{resume-template-latex}}
+\begin{itemize}
+    \item Made a resume template
+\end{itemize}
+
+\project{Monte Carlo Raytracer in OCaml}{\repo{erics118}{ocaml-raytracer}}
+\begin{itemize}
+    \item Created a physically-based renderer from scratch with ray scattering, depth-of-field effect, and ray geometry intersection
+    \item Implemented camera projection, a material system, motion blur, and BVH acceleration structures for efficient rendering
+\end{itemize}
+
+\section{Leadership \& Activities}
+
+\heading[Remote]{Club}{Co-Founder}{May 2020 -- Present}
+\begin{itemize}
+    \item Founded
+    \item Taught
+\end{itemize}
+
+\heading[City, NJ]{Association}{Leader}{Feb 2021 -- Present}
+\begin{itemize}
+    \item Supervised
+    \item Conducted
+\end{itemize}
+
+\section{Awards}
+
+5x AIME Qualifier, USACO Gold, AP Scholar with Distinction, Gold President's Volunteer Service Award
+
+\section{Skills}
+
+\begin{description}
+    \item[Languages] \joinlist{
+            C/C++,
+            Java,
+            Python,
+            Rust,
+            HTML/CSS/JavaScript,
+            TypeScript,
+            Swift,
+            Bash,
+        }
+
+    \item[Frameworks \& Libraries] \joinlist{
+            React,
+            Next.js,
+            FastAPI,
+            NumPy,
+            Matplotlib,
+        }
+
+    \item[Developer Tools] \joinlist{
+            Git,
+            Linux,
+            Docker,
+            CI/CD,
+            PostgreSQL,
+        }
+\end{description}
+
+\end{document}
