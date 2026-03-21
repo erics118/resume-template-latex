@@ -3,10 +3,9 @@
 \usepackage[english]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-\usepackage{latexsym}
 \usepackage{titlesec}
 \usepackage{enumitem}
-\usepackage{xparse} 
+\usepackage{xparse}
 \usepackage[hidelinks]{hyperref}
 \usepackage[normalem]{ulem}
 \usepackage{tikz}
@@ -85,12 +84,18 @@
     \par\vspace{\headingbotspace}%
 }
 
-% join list with trailing commas
+% join items, handling trailing commas
 \ExplSyntaxOn
 \NewDocumentCommand{\joinlist}{m}{
     \clist_use:nn { #1 } { ,~ }
 }
 \ExplSyntaxOff
+
+\AtEndDocument{%
+    \ifnum\value{page}>1
+        \PackageError{resume}{Resume exceeds one page}{}%
+    \fi
+}
 
 \begin{document}
 \begin{center}
@@ -142,7 +147,6 @@
 \end{itemize}
 
 \section{Projects}
-
 
 \project{This Resume Template}{\repo{erics118}{resume-template-latex}}
 \begin{itemize}
