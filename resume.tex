@@ -41,6 +41,7 @@
 % itemize and description formatting
 \setlist[itemize]{label=\graphicbullet, leftmargin=*, nosep, itemsep=\itemsepspace}
 \setlist[description]{leftmargin=0pt, nosep, itemsep=\itemsepspace}
+
 % set description label to italic with colon
 \renewcommand*{\descriptionlabel}[1]{\hspace\labelsep\textit{#1:}}
 
@@ -91,6 +92,8 @@
 }
 \ExplSyntaxOff
 
+% error if output is more than one page
+% comment this out if you don't want this behavior
 \AtEndDocument{%
     \ifnum\value{page}>1
         \PackageError{resume}{Resume exceeds one page}{}%
