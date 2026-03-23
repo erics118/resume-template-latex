@@ -7,7 +7,8 @@ LaTeX resume template.
 - uses rubber lengths with `fil` units so spacing automatically
   stretches/shrinks to fill the page nicely 
 - uses `itemize` and `description` instead of custom wrapper macros
-- only works on one page. optionally error if overflows to a second page 
+- only works on one page. optionally error if overflows to a second page
+- native latex environments for sections and headings, rather than custom commands
 
 ## motivation
 
