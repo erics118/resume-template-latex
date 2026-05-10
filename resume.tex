@@ -1,20 +1,24 @@
-\documentclass[10pt]{article}
+\documentclass[11pt]{article}
 \usepackage[margin=0.5in, letterpaper]{geometry}
 \usepackage[english]{babel}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} % better encoding for accents
+\usepackage[utf8]{inputenc} % better encoding
+\usepackage{latexsym}
 \usepackage{titlesec}
 \usepackage{enumitem}
-\usepackage{xparse}
+\usepackage{xparse} % for \NewDocumentCommand
 \usepackage[hidelinks]{hyperref}
-\usepackage[normalem]{ulem}
+\usepackage[normalem]{ulem} % uline
 \usepackage{tikz}
-\usepackage{fontawesome5}
+\usepackage{fontawesome5} % fontawesome icons
 \usepackage{etoolbox}
 
 \setcounter{secnumdepth}{0} % remove section numbering
+
 \pdfgentounicode=1 % ensure unicode characters in PDF
+
 \pagestyle{empty} % remove page number
+
 \urlstyle{same}
 
 % spacing
@@ -39,9 +43,8 @@
 }
 
 % itemize and description formatting
-\setlist[itemize]{label=\graphicbullet, leftmargin=*, nosep, itemsep=\itemsepspace}
+\setlist[itemize]{label=\graphicbullet, labelindent=6pt, leftmargin=*, labelsep=6pt, nosep, itemsep=\itemsepspace}
 \setlist[description]{leftmargin=0pt, nosep, itemsep=\itemsepspace}
-
 % set description label to italic with colon
 \renewcommand*{\descriptionlabel}[1]{\hspace\labelsep\textit{#1:}}
 
@@ -50,7 +53,7 @@
 \newcommand{\link}[1]{\href{https://#1}{\uline{#1}}}
 \newcommand{\email}[1]{\href{mailto:#1}{\uline{#1}}}
 \newcommand{\repo}[2]{\texttt{\href{https://github.com/#1/#2}{#2}}}
-\newcommand{\name}[1]{{\huge \textbf{#1}} \\ \vspace{3pt plus 3fil minus 2pt}}
+\newcommand{\name}[1]{{\Huge \textbf{#1}} \\ \vspace{3pt plus 3fil minus 2pt}}
 
 \newif\ifatsectionstart
 \atsectionstartfalse
@@ -85,7 +88,7 @@
     \par\vspace{\headingbotspace}%
 }
 
-% join items, handling trailing commas
+% join list with trailing commas
 \ExplSyntaxOn
 \NewDocumentCommand{\joinlist}{m}{
     \clist_use:nn { #1 } { ,~ }
@@ -116,8 +119,6 @@
 \begin{description}
     \item[Relevant Coursework] \joinlist{
             Functional Programming,
-            Discrete Math,
-            Data Structures \& Algorithms,
             Abstract Algebra,
         }
 \end{description}
@@ -126,9 +127,9 @@
 
 \heading[Ithaca, NY]{Cornell Electric Vehicles}{Telemetry Subteam Member}{Sep 2025 -- Present}
 \begin{itemize}
-    \item Contributed to the development of autonomous, hyper-efficient electric vehicles on a 65+ member engineering team
-    \item Owned the migration to a containerized ROS2 stack over Starlink via Tailscale, enabling off-vehicle monitoring at 200Hz
-    \item Built and maintained a dashboard with React + FastAPI, visualizing 10+ sensor streams for live vehicle diagnostics
+    \item Contributed to the development of autonomous, hyper-efficient electric vehicles on a 65+ member team
+    \item Owned the migration to a containerized ROS2 stack over Starlink via Tailscale, enabling off-vehicle monitoring
+    \item Built and maintained a dashboard with React + FastAPI, visualizing 10+ sensor streams for live diagnostics
 \end{itemize}
 
 \heading[Ithaca, NY]{Cornell}{Associate}{Jan 2026 -- Present}
@@ -158,8 +159,8 @@
 
 \project{Monte Carlo Raytracer in OCaml}{\repo{erics118}{ocaml-raytracer}}
 \begin{itemize}
-    \item Created a physically-based renderer from scratch with ray scattering, depth-of-field effect, and ray geometry intersection
-    \item Implemented camera projection, a material system, motion blur, and BVH acceleration structures for efficient rendering
+    \item Created a physically-based renderer from scratch with ray scattering, depth-of-field effect, and ray intersection
+    \item Implemented camera projection, a material system, motion blur, and BVH for efficient rendering
 \end{itemize}
 
 \section{Leadership \& Activities}
